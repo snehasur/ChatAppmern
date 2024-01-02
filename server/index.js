@@ -22,6 +22,9 @@ mongoose
     console.log(err.message);
   });
 
+app.get("/", function (request, response) {
+  response.json({ success: true });
+});
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
@@ -30,7 +33,7 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: ["https://chatapp-react-seven.vercel.app"],
     credentials: true,
   },
 });
