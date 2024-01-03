@@ -9,12 +9,13 @@ require("dotenv").config();
 
 app.use(cors());
 app.use(express.json());
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, PATH, PATCH");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+const corsOptions = {
+  origin: "https://chat-appmern.vercel.app", // Replace with your front-end's domain
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
 
 mongoose
   .connect(process.env.MONGO_URL, {
@@ -39,7 +40,7 @@ const server = app.listen(process.env.PORT, () =>
 );
 const io = socket(server, {
   cors: {
-    origin: ["https://chat-appmern-i9sb.vercel.app"],
+    origin: ["https://chat-appmern.vercel.app"],
     credentials: true,
   },
 });
