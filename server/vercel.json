@@ -6,7 +6,7 @@
   "functions": {
     "myFunction": {
       "memory": 1024,
-      "maxDuration": 90
+      "maxDuration": 120
     }
   }
 }
